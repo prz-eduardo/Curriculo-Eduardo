@@ -1,0 +1,163 @@
+<div class="wrapper">
+  <div class="background-circles">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
+  <div class="header">
+    <div class="language-switch">
+      <span (click)="switchLanguage('pt')">🇧🇷</span> | <span (click)="switchLanguage('en')">🇺🇸</span>
+    </div>
+
+    <div class="profile-header">
+      <div class="avatar">
+        <img src="https://media.licdn.com/dms/image/D4D03AQHP3QW8XSFZrg/profile-displayphoto-shrink_800_800/0/1710888801058?e=1728518400&v=beta&t=XZsQrxcpReMg2WN-WIHaqmX1APf7JmF5rfRv0sffhXU" alt="Eduardo dos Prazeres">
+      </div>
+      <div class="profile-info">
+        <h1>{{ language === 'pt' ? 'Eduardo dos Prazeres' : 'Eduardo Dos Prazeres' }}</h1>
+        <h2>{{ language === 'pt' ? 'Desenvolvedor Full Stack' : 'Full Stack Developer' }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div *ngIf="language === 'pt'; else englishVersion">
+      <!-- Conteúdo em Português -->
+      <div class="row">
+        <div class="education">
+          <h3>Formação Acadêmica</h3>
+          <ul>
+            <li>
+              <strong>Universidade Positivo</strong> - Bacharelado em Engenharia de Software, 5º Período - Noturno<br>
+              Previsão de Conclusão: Dezembro de 2025
+            </li>
+            <li>
+              <strong>Microcamp</strong> - Cursos Profissionalizantes em Hardware e Software
+            </li>
+          </ul>
+        </div>
+
+        <div class="experience">
+          <h3>Experiência Profissional</h3>
+          <ul>
+            <li *ngFor="let exp of experiencesPt" class="experience-card">
+              <strong>{{ exp.title }}</strong>
+              <div>
+                <p><strong>Empresa:</strong> {{ exp.company }}</p>
+                <p><strong>Localização:</strong> {{ exp.location }}</p>
+                <p><strong>Duração:</strong> {{ exp.startDate }} - {{ exp.endDate }} ({{ exp.type }})</p>
+                <p><strong>Responsabilidades:</strong></p>
+                <ul>
+                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="highlightTechnology(responsibility)"></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="soft-skills">
+          <h3>Habilidades Comportamentais</h3>
+          <ul>
+            <li>Trabalho em Equipe</li>
+            <li>Resolução de Conflitos</li>
+            <li>Grande Vontade de Aprender</li>
+            <li>Comunicação Eficaz</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #englishVersion>
+      <!-- Conteúdo em Inglês -->
+      <div class="row">
+        <div class="education">
+          <h3>Education</h3>
+          <ul>
+            <li>
+              <strong>Universidade Positivo</strong> - Bachelor's in Software Engineering, 5th Semester - Night Classes<br>
+              Expected Graduation: December 2025
+            </li>
+            <li>
+              <strong>Microcamp</strong> - Professional Courses in Hardware and Software
+            </li>
+          </ul>
+        </div>
+
+        <div class="experience">
+          <h3>Professional Experience</h3>
+          <ul>
+            <li *ngFor="let exp of experiencesEn" class="experience-card">
+              <strong>{{ exp.title }}</strong>
+              <div>
+                <p><strong>Company:</strong> {{ exp.company }}</p>
+                <p><strong>Location:</strong> {{ exp.location }}</p>
+                <p><strong>Duration:</strong> {{ exp.startDate }} - {{ exp.endDate }} ({{ exp.type }})</p>
+                <p><strong>Responsibilities:</strong></p>
+                <ul>
+                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="highlightTechnology(responsibility)"></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="soft-skills">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Teamwork</li>
+            <li>Conflict Resolution</li>
+            <li>Strong Willingness to Learn</li>
+            <li>Effective Communication</li>
+          </ul>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <!-- About Me -->
+        <div class="about-section">
+          <h6>{{ language === 'pt' ? 'Sobre Mim' : 'About Me' }}</h6>
+          <p class="text-justify">
+            {{ language === 'pt' ? 'Eu sou Eduardo Dos Prazeres, um Desenvolvedor Full Stack apaixonado com experiência em engenharia de software, automação e suporte técnico. Eu gosto de criar soluções inovadoras e de aprimorar continuamente minhas habilidades em tecnologias de ponta.' : 'I am Eduardo Dos Prazeres, a passionate Full Stack Developer with experience in software engineering, automation, and technical support. I enjoy creating innovative solutions and continuously improving my skills in cutting-edge technologies.' }}
+          </p>
+        </div>
+
+        <!-- Categories -->
+        <div class="categories-section">
+          <h6>{{ language === 'pt' ? 'Categorias' : 'Categories' }}</h6>
+          <ul class="footer-links horizontal-list">
+            <li><a href="#">{{ language === 'pt' ? 'Desenvolvimento de Software' : 'Software Development' }}</a></li>
+            <li><a href="#">{{ language === 'pt' ? 'Automação' : 'Automation' }}</a></li>
+            <li><a href="#">{{ language === 'pt' ? 'Suporte Técnico' : 'Technical Support' }}</a></li>
+            <li><a href="#">{{ language === 'pt' ? 'Desenvolvimento Full Stack' : 'Full Stack Development' }}</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="social-icons-section">
+          <ul class="social-icons">
+            <li><a class="facebook" href="mailto:prz.eduardo92@gmail.com?subject=Assunto%20Aqui&body=Olá%20Eduardo%2C%20Tudo%20bem%20%3F%20%3A)"><i class="fa-regular fa-envelope"></i></a></li>
+            <li><a class="twitter" href="https://wa.me/5541984997227?text=Ol%C3%A1%20Eduardo%2C%20Tudo%20bem%20%3F%20%3A)"><i class="fa-brands fa-whatsapp"></i></a></li>
+            <li><a class="linkedin" href="https://www.linkedin.com/in/eduprz/"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a class="github" href="https://github.com/prz-eduardo"><i class="fa-brands fa-github"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright-section">
+          <p class="copyright-text">&copy; 2024 {{ language === 'pt' ? 'Todos os Direitos Reservados por Eduardo Dos Prazeres' : 'All Rights Reserved by Eduardo Dos Prazeres' }}</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
