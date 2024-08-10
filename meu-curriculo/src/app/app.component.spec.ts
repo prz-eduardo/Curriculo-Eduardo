@@ -1,176 +1,29 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
-  title = 'meu-curriculo';
-  language: string = 'pt';  // Define a linguagem padrão como português
-  selectedExperience: any;
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppComponent],
+    }).compileComponents();
+  });
 
-  educationPt = [
-    {
-      institution: 'Universidade Positivo',
-      degree: "Bacharelado em Engenharia de Software",
-      period: '5º Período - Noturno',
-      graduation: 'Dezembro 2025'
-    },
-    {
-      institution: 'Microcamp',
-      degree: 'Cursos Profissionalizantes em Hardware e Software',
-      period: ''
-    }
-  ];
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
 
-  educationEn = [
-    {
-      institution: 'Universidade Positivo',
-      degree: "Bachelor's in Software Engineering",
-      period: '5th Semester - Night Classes',
-      graduation: 'December 2025'
-    },
-    {
-      institution: 'Microcamp',
-      degree: 'Professional Courses in Hardware and Software',
-      period: ''
-    }
-  ];
+  it(`should have the 'meu-curriculo' title`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('meu-curriculo');
+  });
 
-  experiencesPt = [
-    {
-      title: 'Desenvolvedor Full Stack',
-      company: 'Alphacode IT Solutions',
-      location: 'Curitiba, Paraná, Brasil',
-      startDate: 'Mar 2024',
-      endDate: 'Atual',
-      type: 'Presencial',
-      responsibilities: [
-        'Envolvido em projetos de desenvolvimento full-stack, incluindo a criação de aplicativos web e móveis.',
-        'Utilização de Android Studio, MySQL, TypeScript, PHP e Ionic para oferecer soluções completas.',
-        'Colaboração em projetos utilizando metodologias Scrum, garantindo gerenciamento eficaz.',
-        'Focado na implementação e manutenção de aplicações com base em designs fornecidos via Figma.'
-      ]
-    },
-    {
-      title: 'Estagiário de Desenvolvimento em Automação',
-      company: 'Votorantim',
-      location: 'Curitiba, Paraná, Brasil',
-      startDate: 'Jul 2023',
-      endDate: 'Mar 2024',
-      type: 'Híbrido',
-      responsibilities: [
-        'Participação no desenvolvimento de soluções utilizando VBA e Python, automatizando processos para aumentar a eficiência operacional.',
-        'Contribuição para projetos de gestão de dados e relatórios.',
-        'Integração de sistemas e fornecimento de suporte técnico em um ambiente de escritório.'
-      ]
-    },
-    {
-      title: 'Estagiário de Helpdesk',
-      company: 'Employer Tudo do RH',
-      location: 'Curitiba, Paraná, Brasil',
-      startDate: 'Abr 2023',
-      endDate: 'Jul 2023',
-      type: 'Presencial',
-      responsibilities: [
-        'Prestação de suporte técnico, resolvendo questões relacionadas a hardware, software e redes.',
-        'Diagnóstico e solução de problemas técnicos.',
-        'Atualização regular de procedimentos e documentação de suporte.'
-      ]
-    },
-    {
-      title: 'Agente de Atendimento CX',
-      company: 'Foundever',
-      location: 'Curitiba, Paraná, Brasil',
-      startDate: '2021',
-      endDate: '2023',
-      type: '',
-      responsibilities: [
-        'Atendimento ao cliente via chat online para os clientes Olist e PGMBM.',
-        'Resolução de problemas logísticos, como pacotes atrasados ou perdidos.',
-        'Captação de dados para casos legais relacionados ao desabamento das barragens de Mariana e Brumadinho.'
-      ]
-    }
-  ];
-
-  experiencesEn = [
-    {
-      title: 'Full Stack Developer',
-      company: 'Alphacode IT Solutions',
-      location: 'Curitiba, Paraná, Brazil',
-      startDate: 'Mar 2024',
-      endDate: 'Present',
-      type: 'On-site',
-      responsibilities: [
-        'Engaged in full-stack development projects, including web and mobile applications.',
-        'Utilized Android Studio, MySQL, TypeScript, PHP, and Ionic to deliver comprehensive solutions.',
-        'Collaborated on projects using Scrum methodologies, ensuring effective project management.',
-        'Focused on the implementation and maintenance of applications based on Figma designs.'
-      ]
-    },
-    {
-      title: 'Automations Developer Intern',
-      company: 'Votorantim',
-      location: 'Curitiba, Paraná, Brazil',
-      startDate: 'Jul 2023',
-      endDate: 'Mar 2024',
-      type: 'Hybrid',
-      responsibilities: [
-        'Developed solutions using VBA and Python, automating processes to enhance operational efficiency.',
-        'Contributed to data management and reporting projects.',
-        'Integrated systems and provided technical support in an office environment.'
-      ]
-    },
-    {
-      title: 'Helpdesk Intern',
-      company: 'Employer Tudo do RH',
-      location: 'Curitiba, Paraná, Brazil',
-      startDate: 'Apr 2023',
-      endDate: 'Jul 2023',
-      type: 'On-site',
-      responsibilities: [
-        'Provided technical support, resolving hardware, software, and network issues.',
-        'Diagnosed and troubleshot technical problems.',
-        'Regularly updated support procedures and documentation.'
-      ]
-    },
-    {
-      title: 'CX Support Agent',
-      company: 'Foundever',
-      location: 'Curitiba, Paraná, Brazil',
-      startDate: '2021',
-      endDate: '2023',
-      type: '',
-      responsibilities: [
-        'Customer support via online chat for Olist and PGMBM clients.',
-        'Resolved logistical issues such as delayed or lost packages.',
-        'Collected data for legal cases related to the Mariana and Brumadinho dam collapses.'
-      ]
-    }
-  ];
-
-  showDetails(exp: any) {
-    this.selectedExperience = exp;
-  }
-
-  hideDetails() {
-    this.selectedExperience = null;
-  }
-
-  switchLanguage(lang: string) {
-    this.language = lang;
-  }
-
-  get education() {
-    return this.language === 'pt' ? this.educationPt : this.educationEn;
-  }
-
-  get experiences() {
-    return this.language === 'pt' ? this.experiencesPt : this.experiencesEn;
-  }
-}
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, meu-curriculo');
+  });
+});

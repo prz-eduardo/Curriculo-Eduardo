@@ -14,7 +14,7 @@
 
     <div class="profile-header">
       <div class="avatar">
-        <img src="https://media.licdn.com/dms/image/D4D03AQHP3QW8XSFZrg/profile-displayphoto-shrink_800_800/0/1710888801058?e=1728518400&v=beta&t=XZsQrxcpReMg2WN-WIHaqmX1APf7JmF5rfRv0sffhXU" alt="Eduardo dos Prazeres">
+        <img class="foto-perfil" src="https://media.licdn.com/dms/image/D4D03AQEV-DgTn-cHCA/profile-displayphoto-shrink_200_200/0/1723252827059?e=1728518400&v=beta&t=tAAz6-R1lz7CiTjzWpNNCeChti_80M1JY4g0-GMNmKk" alt="Eduardo dos Prazeres">
       </div>
       <div class="profile-info">
         <h1>{{ language === 'pt' ? 'Eduardo dos Prazeres' : 'Eduardo Dos Prazeres' }}</h1>
@@ -28,12 +28,14 @@
       <!-- Conteúdo em Português -->
       <div class="row">
         <div class="education">
-          <h3>Formação Acadêmica</h3>
+          <p class="titulo-xp-edu">Formação Acadêmica</p>
           <ul>
             <li>
               <strong>Universidade Positivo</strong> - Bacharelado em Engenharia de Software, 5º Período - Noturno<br>
               Previsão de Conclusão: Dezembro de 2025
             </li>
+            
+            <br>
             <li>
               <strong>Microcamp</strong> - Cursos Profissionalizantes em Hardware e Software
             </li>
@@ -41,17 +43,19 @@
         </div>
 
         <div class="experience">
-          <h3>Experiência Profissional</h3>
+          <p class="titulo-xp-edu">Experiencia profissional </p>
           <ul>
-            <li *ngFor="let exp of experiencesPt" class="experience-card">
+            <li *ngFor="let exp of experiences" class="experience-card" 
+                [ngClass]="{'active': clickedExperience === exp}" 
+                (click)="toggleDetails(exp)">
               <strong>{{ exp.title }}</strong>
-              <div>
+              <div *ngIf="clickedExperience === exp">
                 <p><strong>Empresa:</strong> {{ exp.company }}</p>
                 <p><strong>Localização:</strong> {{ exp.location }}</p>
                 <p><strong>Duração:</strong> {{ exp.startDate }} - {{ exp.endDate }} ({{ exp.type }})</p>
                 <p><strong>Responsabilidades:</strong></p>
                 <ul>
-                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="highlightTechnology(responsibility)"></li>
+                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="responsibility"></li>
                 </ul>
               </div>
             </li>
@@ -61,7 +65,7 @@
 
       <div class="row">
         <div class="soft-skills">
-          <h3>Habilidades Comportamentais</h3>
+          <p class="titulo-xp-edu">Habilidades Comportamentais</p>
           <ul>
             <li>Trabalho em Equipe</li>
             <li>Resolução de Conflitos</li>
@@ -76,12 +80,13 @@
       <!-- Conteúdo em Inglês -->
       <div class="row">
         <div class="education">
-          <h3>Education</h3>
+          <p class="titulo-xp-edu">Education</p>
           <ul>
             <li>
               <strong>Universidade Positivo</strong> - Bachelor's in Software Engineering, 5th Semester - Night Classes<br>
               Expected Graduation: December 2025
             </li>
+            <br>
             <li>
               <strong>Microcamp</strong> - Professional Courses in Hardware and Software
             </li>
@@ -89,17 +94,19 @@
         </div>
 
         <div class="experience">
-          <h3>Professional Experience</h3>
+          <p class="titulo-xp-edu">Professional Experience</p>
           <ul>
-            <li *ngFor="let exp of experiencesEn" class="experience-card">
+            <li *ngFor="let exp of experiences" class="experience-card" 
+                [ngClass]="{'active': clickedExperience === exp}" 
+                (click)="toggleDetails(exp)">
               <strong>{{ exp.title }}</strong>
-              <div>
-                <p><strong>Company:</strong> {{ exp.company }}</p>
-                <p><strong>Location:</strong> {{ exp.location }}</p>
-                <p><strong>Duration:</strong> {{ exp.startDate }} - {{ exp.endDate }} ({{ exp.type }})</p>
-                <p><strong>Responsibilities:</strong></p>
+              <div *ngIf="clickedExperience === exp">
+                <p><strong>Empresa:</strong> {{ exp.company }}</p>
+                <p><strong>Localização:</strong> {{ exp.location }}</p>
+                <p><strong>Duração:</strong> {{ exp.startDate }} - {{ exp.endDate }} ({{ exp.type }})</p>
+                <p><strong>Responsabilidades:</strong></p>
                 <ul>
-                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="highlightTechnology(responsibility)"></li>
+                  <li *ngFor="let responsibility of exp.responsibilities" [innerHTML]="responsibility"></li>
                 </ul>
               </div>
             </li>
@@ -109,7 +116,7 @@
 
       <div class="row">
         <div class="soft-skills">
-          <h3>Soft Skills</h3>
+          <p class="titulo-xp-edu">Soft Skills</p>
           <ul>
             <li>Teamwork</li>
             <li>Conflict Resolution</li>
@@ -155,7 +162,8 @@
 
         <!-- Copyright -->
         <div class="copyright-section">
-          <p class="copyright-text">&copy; 2024 {{ language === 'pt' ? 'Todos os Direitos Reservados por Eduardo Dos Prazeres' : 'All Rights Reserved by Eduardo Dos Prazeres' }}</p>
+          <p class="copyright-text">&copy; 2024 {{ language === 'pt' ? 'Todos os Direitos Reservados' : 'All Rights Reserved' }}</p>
+          <p>Eduardo Dos Prazeres</p>
         </div>
       </div>
     </div>

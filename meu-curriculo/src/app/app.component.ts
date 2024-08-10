@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewEncapsulation  } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -8,7 +8,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   standalone: true,
   imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   title = 'meu-curriculo';
@@ -156,13 +157,25 @@ export class AppComponent {
       ]
     }
   ];
+  clickedExperience: any;
 
   showDetails(exp: any) {
-    this.selectedExperience = exp;
+    this.selectedExperience = {
+      ...exp,
+      responsibilities: this.highlightResponsibilities(exp.responsibilities)
+    };
   }
 
   hideDetails() {
     this.selectedExperience = null;
+  }
+
+  toggleDetails(exp: any) {
+    if (this.clickedExperience === exp) {
+      this.clickedExperience = null; 
+    } else {
+      this.clickedExperience = exp; 
+    }
   }
 
   switchLanguage(lang: string) {
@@ -176,6 +189,11 @@ export class AppComponent {
       text = text.replace(regex, `<span class="badge">${tech}</span>`);
     });
     return this.sanitizer.bypassSecurityTrustHtml(text);
+  }
+
+  // Método para destacar as tecnologias em todas as responsabilidades
+  highlightResponsibilities(responsibilities: string[]): SafeHtml[] {
+    return responsibilities.map(responsibility => this.highlightTechnology(responsibility));
   }
 
   get education() {
